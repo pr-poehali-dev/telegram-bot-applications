@@ -46,7 +46,7 @@ const ContactForm = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chat_id: "-1002345678901", // TODO: Заменить на реальный chat_id
+            chat_id: "ВАШ_РЕАЛЬНЫЙ_CHAT_ID", // Замените на реальный chat_id
             // Для получения chat_id:
             // 1. Создайте группу/канал в Telegram
             // 2. Добавьте бота @Elliot_BoBot как администратора
