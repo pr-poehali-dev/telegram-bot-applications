@@ -34,8 +34,12 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
+      console.log("Отправка формы...", formData);
+
       // Формируем сообщение для Telegram
       const message = `🔥 Новая заявка на работу!\n\n👤 Имя: ${formData.name}\n📱 Контакт: ${formData.contact}\n💭 Мотивация: ${formData.message}`;
+
+      console.log("Сообщение для отправки:", message);
 
       // Отправляем через бота @Elliot_BoBot
       const response = await fetch(
@@ -47,28 +51,33 @@ const ContactForm = () => {
           },
           body: JSON.stringify({
             chat_id: "-1002423648019",
-            // Для получения chat_id:
-            // 1. Создайте группу/канал в Telegram
-            // 2. Добавьте бота @Elliot_BoBot как администратора
-            // 3. Отправьте любое сообщение в группу
-            // 4. Перейдите: https://api.telegram.org/bot7902938475:AAG_s8dYgxKNpL9KX8HSwBhNu8CJqx5P9fs/getUpdates
-            // 5. Найдите "chat":{"id": -XXXXXXXXX} в ответе
             text: message,
-            parse_mode: "HTML",
+            parse_mode: undefined, // Убираем HTML режим
           }),
         },
       );
 
-      if (response.ok) {
+      console.log("Статус ответа:", response.status);
+      const responseData = await response.json();
+      console.log("Ответ API:", responseData);
+
+      if (response.ok && responseData.ok) {
         setIsSuccess(true);
+        console.log("Сообщение успешно отправлено!");
       } else {
-        throw new Error("Ошибка отправки");
+        throw new Error(
+          `Ошибка API: ${responseData.description || "Неизвестная ошибка"}`,
+        );
       }
     } catch (error) {
-      console.error("Ошибка при отправке заявки:", error);
-      alert("Произошла ошибка при отправке заявки. Попробуйте ещё раз.");
+      console.error("Ошибка при отправке:", error);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Произошла ошибка при отправке",
+      );
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
