@@ -37,16 +37,16 @@ const ContactForm = () => {
       // Формируем сообщение для Telegram
       const message = `🔥 Новая заявка на работу!\n\n👤 Имя: ${formData.name}\n📱 Контакт: ${formData.contact}\n💭 Мотивация: ${formData.message}`;
 
-      // Отправляем через Telegram Bot API
+      // Отправляем через бота @Elliot_BoBot
       const response = await fetch(
-        `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+        `https://api.telegram.org/bot7902938475:AAG_s8dYgxKNpL9KX8HSwBhNu8CJqx5P9fs/sendMessage`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chat_id: "@zamkidelmaster",
+            chat_id: "1234567890", // ID чата получателя
             text: message,
             parse_mode: "HTML",
           }),
