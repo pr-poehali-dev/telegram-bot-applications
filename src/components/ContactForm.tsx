@@ -46,7 +46,7 @@ const ContactForm = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            chat_id: "1234567890", // ID чата получателя
+            chat_id: "-1002345678901", // Замените на реальный chat_id пользователя @zamkidelmaster
             text: message,
             parse_mode: "HTML",
           }),
