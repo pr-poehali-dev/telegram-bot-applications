@@ -33,13 +33,37 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Имитация отправки (здесь будет интеграция с Telegram bot)
-    console.log("Заявка:", formData);
+    try {
+      // Формируем сообщение для Telegram
+      const message = `🔥 Новая заявка на работу!\n\n👤 Имя: ${formData.name}\n📱 Контакт: ${formData.contact}\n💭 Мотивация: ${formData.message}`;
 
-    setTimeout(() => {
+      // Отправляем через Telegram Bot API
+      const response = await fetch(
+        `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            chat_id: "@zamkidelmaster",
+            text: message,
+            parse_mode: "HTML",
+          }),
+        },
+      );
+
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        throw new Error("Ошибка отправки");
+      }
+    } catch (error) {
+      console.error("Ошибка при отправке заявки:", error);
+      alert("Произошла ошибка при отправке заявки. Попробуйте ещё раз.");
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 1500);
+    }
   };
 
   if (isSuccess) {
