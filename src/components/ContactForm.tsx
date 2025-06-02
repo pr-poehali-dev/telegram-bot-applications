@@ -19,6 +19,7 @@ const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -43,7 +44,7 @@ const ContactForm = () => {
 
       // Отправляем через бота @Elliot_BoBot
       const response = await fetch(
-        `https://api.telegram.org/bot7902938475:AAG_s8dYgxKNpL9KX8HSwBhNu8CJqx5P9fs/sendMessage`,
+        `https://api.telegram.org/bot7914446621:AAF-8Rj3ZiqDawiEzfWLpmoHtcXXEBfLBzw/sendMessage`,
         {
           method: "POST",
           headers: {
@@ -77,7 +78,7 @@ const ContactForm = () => {
           : "Произошла ошибка при отправке",
       );
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
