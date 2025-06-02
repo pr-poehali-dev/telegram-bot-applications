@@ -38,7 +38,11 @@ const ContactForm = () => {
       console.log("Отправка формы...", formData);
 
       // Формируем сообщение для Telegram
-      const message = `🔥 Новая заявка на работу!\n\n👤 Имя: ${formData.name}\n📱 Контакт: ${formData.contact}\n💭 Мотивация: ${formData.message}`;
+      const message = `🔥 Новая заявка на работу!
+
+👤 Имя: ${formData.name}
+📱 Контакт: ${formData.contact}
+💭 Мотивация: ${formData.message}`;
 
       console.log("Сообщение для отправки:", message);
 
