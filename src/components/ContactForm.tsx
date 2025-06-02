@@ -106,14 +106,14 @@ const ContactForm = () => {
 
       <div className="space-y-2">
         <Label htmlFor="message" className="font-rubik font-medium">
-          Сообщение
+          Почему вы хотите работать у нас?
         </Label>
         <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Расскажите о вашем вопросе или задаче"
+          placeholder="Расскажите о своей мотивации и что привлекает вас в нашей компании"
           rows={4}
           required
           className="font-rubik"
